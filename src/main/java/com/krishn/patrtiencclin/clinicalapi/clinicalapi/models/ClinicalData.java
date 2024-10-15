@@ -2,6 +2,8 @@ package com.krishn.patrtiencclin.clinicalapi.clinicalapi.models;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -24,11 +26,20 @@ public class ClinicalData {
     private Long id;
     private String componentName;
     private String componentValue;
+    @CreationTimestamp
     private Timestamp measuredDateTime;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     @JsonIgnore
     private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
     // Getters and Setters
     public Long getId() {
